@@ -1,0 +1,405 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Portfolio Eau et Environnement</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Concept : une coupe de terrain (sol, nappe, forage) comme fil rouge ; le reste est sobre, en colonnes de lecture.
+   Couleurs : encre bleu nuit, eau, ocre du Sahel (rare), sable. Typo : Bricolage Grotesque (titres), Public Sans (texte), IBM Plex Mono (repères). */
+:root {
+  --bg: #edf3f3;
+  --surface: #f8fbfb;
+  --ink: #0c2430;
+  --muted: #4b6470;
+  --line: #c9d8db;
+  --water: #0f6f8f;
+  --water-soft: #bfe0e8;
+  --sun: #c77b14;
+  --soil: #dccfae;
+  --rock: #b9c4c6;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #081a22; --surface: #0e2530; --ink: #e4f0f2; --muted: #93aeb8; --line: #1f3c48;
+    --water: #5bc0de; --water-soft: #12485a; --sun: #e8a44a; --soil: #3a3426; --rock: #1b3039;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #081a22; --surface: #0e2530; --ink: #e4f0f2; --muted: #93aeb8; --line: #1f3c48;
+  --water: #5bc0de; --water-soft: #12485a; --sun: #e8a44a; --soil: #3a3426; --rock: #1b3039;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; text-wrap: balance; margin: 0; }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--water); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--water); outline-offset: 3px; border-radius: 2px; }
+.label { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.todo { background: color-mix(in srgb, var(--sun) 16%, transparent); border-bottom: 1px dashed var(--sun); padding: 0 .2em; }
+
+/* En-tête */
+.top { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; align-items: center; padding-block: 22px; border-bottom: 1px solid var(--line); }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 19px; }
+.top nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.top nav a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500; }
+.top nav a:hover { color: var(--water); text-decoration: underline; }
+
+/* Accueil */
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 56px 64px; }
+.hero h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); font-weight: 700; letter-spacing: -.02em; margin-block: 14px 20px; }
+.hero h1 em { font-style: normal; color: var(--water); }
+.hero .lead { font-size: 1.15rem; color: var(--muted); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn { display: inline-block; padding: 12px 20px; border-radius: 6px; font-weight: 600; font-size: 15px; text-decoration: none; border: 1.5px solid var(--water); }
+.btn.primary { background: var(--water); color: var(--bg); }
+.btn.ghost { color: var(--water); }
+.btn:hover { filter: brightness(1.08); }
+.coupe { width: 100%; height: auto; display: block; }
+.coupe .soil { fill: var(--soil); }
+.coupe .aquifer { fill: var(--water-soft); }
+.coupe .rock { fill: var(--rock); }
+.coupe .water { fill: var(--water); }
+.coupe .line { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+.coupe .thin { stroke: var(--muted); stroke-width: 1; fill: none; stroke-dasharray: 3 4; }
+.coupe text { fill: var(--ink); font-family: var(--font-mono); font-size: 12px; }
+.coupe .cap { fill: var(--muted); font-size: 11px; letter-spacing: .06em; }
+
+/* Repère chiffré */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border-block: 1px solid var(--line); }
+.facts div { padding: 22px 24px 22px 0; }
+.facts b { display: block; font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; margin-bottom: 4px; }
+.facts span { color: var(--muted); font-size: 15px; display: block; max-width: 34ch; }
+
+/* Sections */
+section { padding-block: 72px 8px; }
+.sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 16px 40px; margin-bottom: 36px; }
+.sec-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); letter-spacing: -.01em; }
+.sec-head p { color: var(--muted); }
+
+/* Parcours */
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--water); }
+.timeline li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 4px 28px; padding: 0 0 34px 28px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--water); }
+.timeline .when { font-family: var(--font-mono); font-size: 13.5px; color: var(--muted); padding-top: 3px; }
+.timeline h3 { font-size: 1.2rem; margin-bottom: 4px; }
+.timeline .where { color: var(--water); font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.timeline p { color: var(--muted); }
+
+/* Expertise */
+.rows { border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 8px 40px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.row h3 { font-size: 1.2rem; }
+.row p { color: var(--muted); }
+
+/* Réalisations */
+.work { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 12px 40px; padding: 30px 0; border-top: 1px solid var(--line); }
+.work:last-child { border-bottom: 1px solid var(--line); }
+.work .meta { display: flex; flex-direction: column; gap: 4px; }
+.work h3 { font-size: 1.45rem; margin-bottom: 14px; }
+.work dl { margin: 0; display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 8px 18px; }
+.work dt { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--water); padding-top: 4px; }
+.work dd { margin: 0; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 12px; color: var(--muted); background: var(--surface); }
+
+/* Enseignement */
+.course { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 28px 44px; }
+.course h3 { font-size: 1.6rem; margin-bottom: 12px; }
+.course .facts-mini { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+.course .facts-mini b { color: var(--ink); font-weight: 600; }
+.weeks { display: grid; gap: 22px; }
+.week h4 { font-family: var(--font-mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--water); margin: 0 0 6px; font-weight: 500; }
+.week ul { margin: 0; padding-left: 20px; color: var(--muted); }
+.week li { margin-bottom: 4px; }
+
+/* Vision */
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 32px 36px; counter-reset: p; }
+.principles div { border-top: 3px solid var(--water); padding-top: 14px; }
+.principles h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.principles p { color: var(--muted); font-size: 16px; }
+.quote { margin-top: 48px; padding: 28px 0 0; border-top: 1px solid var(--line); font-family: var(--font-display); font-size: clamp(1.3rem, 2.6vw, 1.8rem); line-height: 1.3; max-width: 30ch; }
+.quote span { color: var(--water); }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 40px; align-items: start; }
+.contact ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.contact li { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: center; }
+.contact li .label { min-width: 90px; }
+.copy { font: inherit; font-size: 13px; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.copy:hover { border-color: var(--water); }
+footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 820px) {
+  .hero, .sec-head, .row, .work, .course, .contact { grid-template-columns: minmax(0, 1fr); }
+  .hero { padding-block: 36px 48px; gap: 32px; }
+  .timeline li { grid-template-columns: minmax(0, 1fr); }
+  .work dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .work dt { padding-top: 10px; }
+  .course { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="todo">[Votre nom]</span></div>
+    <nav aria-label="Navigation principale">
+      <a href="#parcours">Parcours</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#enseignement">Enseignement</a>
+      <a href="#vision">Vision</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <span class="label">Environnementaliste · Eau potable · Afrique de l'Ouest</span>
+        <h1>Garantir l'accès à l'eau, aujourd'hui et pour les <em>générations à venir</em>.</h1>
+        <p class="lead">Je travaille sur les grands enjeux environnementaux, avec un axe central : l'accès à une eau potable sûre et durable. Mon objectif est de montrer pourquoi l'environnement compte pour la santé, l'économie et la vie des communautés, et comment le préserver sur le long terme.</p>
+        <div class="cta">
+          <a class="btn primary" href="#realisations">Voir mes réalisations</a>
+          <a class="btn ghost" href="#contact">Me contacter</a>
+        </div>
+      </div>
+
+      <svg class="coupe" viewBox="0 0 560 380" role="img" aria-label="Coupe de terrain : un lac à gauche, un sol, une nappe souterraine et un forage qui descend jusqu'à la nappe">
+        <rect class="soil" x="0" y="96" width="560" height="104"/>
+        <rect class="aquifer" x="0" y="200" width="560" height="96"/>
+        <rect class="rock" x="0" y="296" width="560" height="84"/>
+        <path class="water" d="M0 96 L0 96 C30 150 120 160 170 96 Z"/>
+        <path class="line" d="M0 96 C60 92 120 100 170 96 L560 96"/>
+        <path class="thin" d="M0 200 L560 200"/>
+        <path class="thin" d="M0 296 L560 296"/>
+        <!-- forage -->
+        <rect x="372" y="66" width="12" height="30" fill="var(--ink)"/>
+        <path d="M366 66 L390 66 L378 52 Z" fill="var(--ink)"/>
+        <path class="line" d="M378 96 L378 262" stroke-width="2.5"/>
+        <path class="line" d="M366 262 L390 262"/>
+        <!-- eau remontant -->
+        <circle cx="378" cy="40" r="4" fill="var(--water)"/>
+        <circle cx="388" cy="30" r="3" fill="var(--water)"/>
+        <circle cx="366" cy="32" r="3" fill="var(--water)"/>
+        <!-- flèche profondeur -->
+        <path class="line" d="M30 118 L30 270"/>
+        <path class="line" d="M25 262 L30 272 L35 262"/>
+        <text class="cap" x="42" y="196" transform="rotate(90 42 196)" text-anchor="middle">PROFONDEUR</text>
+        <!-- étiquettes -->
+        <text x="62" y="86">Lac ou fleuve</text>
+        <text x="200" y="150">Sol et zone non saturée</text>
+        <text x="200" y="254">Nappe souterraine</text>
+        <text x="200" y="340">Socle</text>
+        <text x="396" y="130">Forage</text>
+        <text class="cap" x="0" y="372">COUPE SCHÉMATIQUE D'UN AQUIFÈRE</text>
+      </svg>
+    </div>
+
+    <div class="facts">
+      <div><b>ODD 6</b><span>Garantir l'accès de tous à l'eau et à l'assainissement et assurer une gestion durable des ressources en eau.</span></div>
+      <div><b>50 à 100 L par jour</b><span>Volume d'eau par personne que l'OMS cite pour couvrir les besoins de base.</span></div>
+      <div><b><span class="todo">[X] ans</span></b><span>d'expérience de terrain, de recherche ou d'enseignement sur l'eau et l'environnement.</span></div>
+    </div>
+
+    <section id="parcours" aria-labelledby="t-parcours">
+      <div class="sec-head">
+        <h2 id="t-parcours">Parcours</h2>
+        <p>Mes postes, missions et formations, du plus récent au plus ancien.</p>
+      </div>
+      <ol class="timeline">
+        <li>
+          <div class="when"><span class="todo">[Année – aujourd'hui]</span></div>
+          <div>
+            <h3><span class="todo">[Intitulé du poste ou de la mission]</span></h3>
+            <div class="where"><span class="todo">[Organisation, ville, pays]</span></div>
+            <p><span class="todo">[Une ou deux phrases : votre rôle, vos responsabilités, le résultat principal.]</span></p>
+          </div>
+        </li>
+        <li>
+          <div class="when"><span class="todo">[Année – Année]</span></div>
+          <div>
+            <h3><span class="todo">[Intitulé du poste, stage ou projet]</span></h3>
+            <div class="where"><span class="todo">[Organisation, ville, pays]</span></div>
+            <p><span class="todo">[Ce que vous avez fait, avec un chiffre si possible : nombre de villages, de personnes, de points d'eau.]</span></p>
+          </div>
+        </li>
+        <li>
+          <div class="when"><span class="todo">[Année – Année]</span></div>
+          <div>
+            <h3><span class="todo">[Diplôme, spécialité]</span></h3>
+            <div class="where"><span class="todo">[Université ou école, pays]</span></div>
+            <p><span class="todo">[Sujet de mémoire ou de thèse, certifications, langues.]</span></p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="expertise" aria-labelledby="t-expertise">
+      <div class="sec-head">
+        <h2 id="t-expertise">Domaines d'expertise</h2>
+        <p>Un socle large sur les questions environnementales, avec l'eau comme spécialité.</p>
+      </div>
+      <div class="rows">
+        <div class="row"><h3>Accès à l'eau potable</h3><p>Diagnostic des besoins, choix des solutions (forages, adductions, traitement à domicile) et suivi du service dans les villages et les quartiers.</p></div>
+        <div class="row"><h3>Qualité de l'eau</h3><p>Analyse des risques liés à la salinité, aux nitrates, au fluor et aux contaminations microbiologiques, et recommandations adaptées au contexte local.</p></div>
+        <div class="row"><h3>Gestion intégrée des ressources</h3><p>Lecture à l'échelle du bassin : fleuves, lacs, nappes, usages agricoles, urbains et domestiques, et arbitrages entre eux.</p></div>
+        <div class="row"><h3>Climat et adaptation</h3><p>Prise en compte de la variabilité des pluies, de la sécheresse et de la remontée du sel dans la conception des projets.</p></div>
+        <div class="row"><h3>Éducation et sensibilisation</h3><p>Formation d'étudiants, de professionnels et de communautés pour faire comprendre pourquoi et comment préserver l'environnement.</p></div>
+        <div class="row"><h3>Suivi et évaluation</h3><p>Indicateurs, collecte de données de terrain et rapports qui permettent de mesurer ce qui fonctionne dans la durée.</p></div>
+      </div>
+    </section>
+
+    <section id="realisations" aria-labelledby="t-real">
+      <div class="sec-head">
+        <h2 id="t-real">Réalisations</h2>
+        <p>Trois projets choisis, présentés avec le contexte, mon action et le résultat obtenu.</p>
+      </div>
+      <article class="work">
+        <div class="meta"><span class="label todo">[Année]</span><span class="label todo">[Lieu, région]</span></div>
+        <div>
+          <h3><span class="todo">[Titre du projet 1]</span></h3>
+          <dl>
+            <dt>Contexte</dt><dd><span class="todo">[Quel problème d'accès à l'eau, pour qui, dans quel territoire.]</span></dd>
+            <dt>Action</dt><dd><span class="todo">[Ce que vous avez conçu, conduit ou analysé, et avec quels partenaires.]</span></dd>
+            <dt>Résultat</dt><dd><span class="todo">[Chiffres : [X] personnes desservies, [X] points d'eau, baisse de [X] % des maladies hydriques.]</span></dd>
+          </dl>
+          <div class="tags"><span class="tag">Eau potable</span><span class="tag">Terrain</span><span class="tag todo">[Partenaire]</span></div>
+        </div>
+      </article>
+      <article class="work">
+        <div class="meta"><span class="label todo">[Année]</span><span class="label todo">[Lieu, région]</span></div>
+        <div>
+          <h3><span class="todo">[Titre du projet 2]</span></h3>
+          <dl>
+            <dt>Contexte</dt><dd><span class="todo">[…]</span></dd>
+            <dt>Action</dt><dd><span class="todo">[…]</span></dd>
+            <dt>Résultat</dt><dd><span class="todo">[…]</span></dd>
+          </dl>
+          <div class="tags"><span class="tag">Qualité de l'eau</span><span class="tag todo">[Thème]</span></div>
+        </div>
+      </article>
+      <article class="work">
+        <div class="meta"><span class="label todo">[Année]</span><span class="label todo">[Lieu, région]</span></div>
+        <div>
+          <h3><span class="todo">[Titre du projet 3, publication ou étude]</span></h3>
+          <dl>
+            <dt>Contexte</dt><dd><span class="todo">[…]</span></dd>
+            <dt>Action</dt><dd><span class="todo">[…]</span></dd>
+            <dt>Résultat</dt><dd><span class="todo">[…]</span></dd>
+          </dl>
+          <div class="tags"><span class="tag">Gestion des ressources</span><span class="tag todo">[Thème]</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="enseignement" aria-labelledby="t-ens">
+      <div class="sec-head">
+        <h2 id="t-ens">Enseignement</h2>
+        <p>Transmettre est l'autre moitié du travail : on ne protège que ce que l'on comprend.</p>
+      </div>
+      <div class="course">
+        <div>
+          <span class="label">Formation</span>
+          <h3>L'accès à l'eau potable en Afrique de l'Ouest</h3>
+          <p>Un cours pour comprendre pourquoi et comment préserver l'environnement à long terme, à partir du cas du Sénégal.</p>
+          <ul class="facts-mini">
+            <li><b>Durée :</b> 2 semaines</li>
+            <li><b>Format :</b> en présentiel</li>
+            <li><b>Public :</b> étudiants et professionnels</li>
+            <li><b>Terrain d'étude :</b> Sénégal et Afrique de l'Ouest</li>
+          </ul>
+        </div>
+        <div class="weeks">
+          <div class="week">
+            <h4>Semaine 1 · Comprendre</h4>
+            <ul>
+              <li>Cycle de l'eau et ressources du Sénégal : fleuve, lacs, nappes</li>
+              <li>Qualité de l'eau et santé publique</li>
+              <li>Pressions : démographie, urbanisation, climat, salinisation</li>
+            </ul>
+          </div>
+          <div class="week">
+            <h4>Semaine 2 · Agir</h4>
+            <ul>
+              <li>Solutions d'accès : forages, réseaux, traitement, assainissement</li>
+              <li>Gouvernance, financement et gestion par les communautés</li>
+              <li>Projet de groupe : un plan de préservation à long terme</li>
+            </ul>
+          </div>
+          <p class="label">Programme prévisionnel, à ajuster avec vos objectifs pédagogiques.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="vision" aria-labelledby="t-vision">
+      <div class="sec-head">
+        <h2 id="t-vision">Pourquoi l'environnement compte, et comment le préserver</h2>
+        <p>L'eau potable dépend de la santé des sols, des cours d'eau et des nappes. Protéger l'environnement, c'est protéger la santé, l'agriculture et la stabilité des communautés. Quatre principes guident mon travail.</p>
+      </div>
+      <div class="principles">
+        <div><h3>Protéger la ressource à la source</h3><p>Il coûte moins cher d'éviter la pollution et la surexploitation que de réparer une nappe ou un fleuve dégradé.</p></div>
+        <div><h3>Gérer par bassin</h3><p>Une même eau sert l'agriculture, la ville et les foyers. Les décisions se prennent à l'échelle du bassin, pas projet par projet.</p></div>
+        <div><h3>Impliquer les communautés</h3><p>Un ouvrage dure quand ceux qui l'utilisent savent l'entretenir, le financer et le défendre.</p></div>
+        <div><h3>Mesurer et transmettre</h3><p>Des données fiables et des personnes formées permettent de corriger la trajectoire et de passer le relais.</p></div>
+      </div>
+      <p class="quote">Préserver l'environnement, c'est d'abord <span>garantir de l'eau demain</span>.</p>
+    </section>
+
+    <section id="contact" aria-labelledby="t-contact">
+      <div class="sec-head">
+        <h2 id="t-contact">Contact</h2>
+        <p>Collaboration, mission, intervention en formation ou simple question : écrivez-moi.</p>
+      </div>
+      <div class="contact">
+        <ul>
+          <li><span class="label">E-mail</span><span id="mail" class="todo">[votre.adresse@exemple.org]</span><button class="copy" type="button" id="copy-mail">Copier</button></li>
+          <li><span class="label">Téléphone</span><span class="todo">[+221 XX XXX XX XX]</span></li>
+          <li><span class="label">Localisation</span><span class="todo">[Dakar, Sénégal]</span></li>
+          <li><span class="label">LinkedIn</span><span class="todo">[lien vers votre profil]</span></li>
+        </ul>
+        <p>Je réponds aux demandes liées à l'accès à l'eau, à la gestion des ressources en eau, à la formation et à l'évaluation de projets environnementaux.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="yr">2026</span> <span class="todo">[Votre nom]</span></span>
+    <span>Environnementaliste · Eau et préservation à long terme</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  try { document.getElementById("yr").textContent = new Date().getFullYear(); } catch (e) {}
+  var btn = document.getElementById("copy-mail");
+  var mail = document.getElementById("mail");
+  btn.addEventListener("click", function () {
+    var txt = mail.textContent;
+    function done(ok) { btn.textContent = ok ? "Copié" : "Sélectionné"; setTimeout(function () { btn.textContent = "Copier"; }, 1800); }
+    function fallback() {
+      try { var r = document.createRange(); r.selectNodeContents(mail); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+      done(false);
+    }
+    try {
+      navigator.clipboard.writeText(txt).then(function () { done(true); }, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>
